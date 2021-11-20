@@ -28,13 +28,14 @@ const {
   network,
   solanaMetadata,
   gif,
+  head_with_ear_map,
 } = require(path.join(basePath, "/src/config.js"));
 const canvas = createCanvas(format.width, format.height);
 const ctx = canvas.getContext("2d");
 var metadataList = [];
 var attributesList = [];
 var dnaList = new Set();
-const DNA_DELIMITER = "-";
+const DNA_DELIMITER = "!";
 const HashlipsGiffer = require(path.join(
   basePath,
   "/modules/HashlipsGiffer.js"
@@ -44,7 +45,7 @@ let hashlipsGiffer = null;
 
 const buildSetup = () => {
   if (fs.existsSync(buildDir)) {
-    fs.rmdirSync(buildDir, { recursive: true });
+    fs.rmSync(buildDir, { recursive: true });
   }
   fs.mkdirSync(buildDir);
   fs.mkdirSync(path.join(buildDir, "/json"));
@@ -218,15 +219,38 @@ const drawElement = (_renderObject, _index, _layersLen) => {
 
 const constructLayerToDna = (_dna = "", _layers = []) => {
   let mappedDnaToLayers = _layers.map((layer, index) => {
-    let selectedElement = layer.elements.find(
-      (e) => e.id == cleanDna(_dna.split(DNA_DELIMITER)[index])
-    );
+    let selectedElement = layer.elements.find((e) => {
+      return e.id == cleanDna(_dna.split(DNA_DELIMITER)[index]);
+    });
     return {
       name: layer.name,
       blend: layer.blend,
       opacity: layer.opacity,
       selectedElement: selectedElement,
     };
+  });
+
+  let body = {};
+  mappedDnaToLayers.forEach((item) => {
+    if (item.name === "body") {
+      item.selectedElement.path = item.selectedElement.path.replace(
+        "body_ear",
+        "body"
+      );
+      body = item;
+      return;
+    }
+
+    if (item.name === "head") {
+      const selectedElement = item.selectedElement;
+      if (head_with_ear_map.includes(selectedElement.name)) {
+        const filename = body.selectedElement.filename;
+        body.selectedElement.path =
+          "/Users/cauemarcondes/Documents/dev/hashlips_art_engine/layers/body_ear/" +
+          filename;
+      }
+      return;
+    }
   });
   return mappedDnaToLayers;
 };

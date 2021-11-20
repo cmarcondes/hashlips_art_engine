@@ -27,27 +27,41 @@ const solanaMetadata = {
 
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
+  //gang-a
   {
-    growEditionSizeTo: 5,
+    growEditionSizeTo: 100,
     layersOrder: [
-      { name: "Background" },
-      { name: "Eyeball" },
-      { name: "Eye color" },
-      { name: "Iris" },
-      { name: "Shine" },
-      { name: "Bottom lid" },
-      { name: "Top lid" },
+      { name: "background" },
+      { name: "body" },
+      { name: "eye" },
+      { name: "head" },
+      { name: "cloth" },
+      { name: "mouth" },
+      { name: "nouse" },
     ],
   },
 ];
 
-const shuffleLayerConfigurations = false;
+const head_with_ear_map = [
+  "apple",
+  "angel",
+  "birds",
+  "birthday hat",
+  "blond hair",
+  "earings",
+  "head phone",
+  "helmet",
+  "thinking mouse",
+  "thinking solana",
+];
+
+const shuffleLayerConfigurations = true;
 
 const debugLogs = false;
 
 const format = {
-  width: 512,
-  height: 512,
+  width: 1000,
+  height: 1000,
 };
 
 const gif = {
@@ -112,4 +126,5 @@ module.exports = {
   network,
   solanaMetadata,
   gif,
+  head_with_ear_map,
 };
