@@ -6,7 +6,7 @@ const basePath = isLocal ? process.cwd() : path.dirname(process.execPath);
 const { MODE } = require(path.join(basePath, "constants/blend_mode.js"));
 const { NETWORK } = require(path.join(basePath, "constants/network.js"));
 
-const network = NETWORK.eth;
+const network = NETWORK.sol;
 
 // General metadata for Ethereum
 const namePrefix = "Your Collection";
@@ -33,29 +33,29 @@ const layerConfigurations = [
     layersOrder: [
       { name: "background" },
       { name: "body" },
+      { name: "cloth" },
       { name: "eye" },
       { name: "head" },
-      { name: "cloth" },
       { name: "mouth" },
-      { name: "nouse" },
+      { name: "nose" },
     ],
   },
 ];
 
 const head_with_ear_map = [
-  "apple",
+  "Arrow through apple",
   "angel",
-  "birds",
-  "birthday hat",
-  "blond hair",
-  "earings",
-  "head phone",
-  "helmet",
-  "thinking mouse",
-  "thinking solana",
+  "Birds",
+  "Birthday hat",
+  "Blond hair",
+  "Earings",
+  "Headphone",
+  "Sport helmet",
+  "Mouse thinking",
+  "Solana thinking",
 ];
 
-const shuffleLayerConfigurations = true;
+const shuffleLayerConfigurations = false;
 
 const debugLogs = false;
 

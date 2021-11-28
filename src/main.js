@@ -35,6 +35,7 @@ const ctx = canvas.getContext("2d");
 var metadataList = [];
 var attributesList = [];
 var dnaList = new Set();
+var dnaListWithoutbackground = new Set();
 const DNA_DELIMITER = "!";
 const HashlipsGiffer = require(path.join(
   basePath,
@@ -338,7 +339,15 @@ const startCreating = async () => {
       editionCount <= layerConfigurations[layerConfigIndex].growEditionSizeTo
     ) {
       let newDna = createDna(layers);
-      if (isDnaUnique(dnaList, newDna)) {
+
+      const dnaDetailed = newDna.split(DNA_DELIMITER);
+      dnaDetailed.shift();
+      const newDnaWithoutBackground = dnaDetailed.join(DNA_DELIMITER);
+
+      if (
+        isDnaUnique(dnaList, newDna) &&
+        isDnaUnique(dnaListWithoutbackground, newDnaWithoutBackground)
+      ) {
         let results = constructLayerToDna(newDna, layers);
         let loadedElements = [];
 
@@ -389,6 +398,8 @@ const startCreating = async () => {
           );
         });
         dnaList.add(newDna);
+        dnaListWithoutbackground.add(newDnaWithoutBackground);
+
         editionCount++;
         abstractedIndexes.shift();
       } else {
