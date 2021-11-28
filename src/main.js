@@ -29,6 +29,7 @@ const {
   solanaMetadata,
   gif,
   head_with_ear_map,
+  head_without_ear_map,
 } = require(path.join(basePath, "/src/config.js"));
 const canvas = createCanvas(format.width, format.height);
 const ctx = canvas.getContext("2d");
@@ -235,7 +236,7 @@ const constructLayerToDna = (_dna = "", _layers = []) => {
   mappedDnaToLayers.forEach((item) => {
     if (item.name === "body") {
       item.selectedElement.path = item.selectedElement.path.replace(
-        "body_ear",
+        "body_without_ear",
         "body"
       );
       body = item;
@@ -244,10 +245,10 @@ const constructLayerToDna = (_dna = "", _layers = []) => {
 
     if (item.name === "head") {
       const selectedElement = item.selectedElement;
-      if (head_with_ear_map.includes(selectedElement.name)) {
+      if (head_without_ear_map.includes(selectedElement.name)) {
         const filename = body.selectedElement.filename;
         body.selectedElement.path =
-          "/Users/cauemarcondes/Documents/dev/hashlips_art_engine/layers/body_ear/" +
+          "/Users/cauemarcondes/Documents/dev/hashlips_art_engine/layers/body_without_ear/" +
           filename;
       }
       return;

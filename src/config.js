@@ -27,9 +27,8 @@ const solanaMetadata = {
 
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
-  //gang-a
   {
-    growEditionSizeTo: 100,
+    growEditionSizeTo: 9700,
     layersOrder: [
       { name: "background" },
       { name: "body" },
@@ -40,6 +39,28 @@ const layerConfigurations = [
       { name: "nose" },
     ],
   },
+  {
+    growEditionSizeTo: 300,
+    layersOrder: [
+      { name: "background" },
+      { name: "body" },
+      { name: "mask" },
+      { name: "cloth" },
+    ],
+  },
+];
+
+const head_without_ear_map = [
+  "Backwards cap",
+  "Chef",
+  "Cowboy hat",
+  "Drinker beer helmet",
+  "Frankenstein costume",
+  "I love catnip cap",
+  "Santa claus hat",
+  "Top hat",
+  "Warrior armor helmet",
+  "Winter hat",
 ];
 
 const head_with_ear_map = [
@@ -127,4 +148,5 @@ module.exports = {
   solanaMetadata,
   gif,
   head_with_ear_map,
+  head_without_ear_map,
 };
