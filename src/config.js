@@ -40,7 +40,7 @@ const layerConfigurations = [
     ],
   },
   {
-    growEditionSizeTo: 300,
+    growEditionSizeTo: 10000,
     layersOrder: [
       { name: "background" },
       { name: "body" },
@@ -76,7 +76,7 @@ const head_with_ear_map = [
   "Solana thinking",
 ];
 
-const shuffleLayerConfigurations = false;
+const shuffleLayerConfigurations = true;
 
 const debugLogs = false;
 

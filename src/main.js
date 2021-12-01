@@ -314,6 +314,13 @@ function shuffle(array) {
   return array;
 }
 
+function shouldSkip(dna) {
+  const containsPoppedEyes = dna.includes("Popped out eyes");
+  const containsLoveCatnipCap = dna.includes("I love catnip cap");
+
+  return containsPoppedEyes && containsLoveCatnipCap;
+}
+
 const startCreating = async () => {
   let layerConfigIndex = 0;
   let editionCount = 1;
@@ -345,9 +352,12 @@ const startCreating = async () => {
       dnaDetailed.shift();
       const newDnaWithoutBackground = dnaDetailed.join(DNA_DELIMITER);
 
+      const skip = shouldSkip(newDna);
+
       if (
         isDnaUnique(dnaList, newDna) &&
-        isDnaUnique(dnaListWithoutbackground, newDnaWithoutBackground)
+        isDnaUnique(dnaListWithoutbackground, newDnaWithoutBackground) &&
+        !skip
       ) {
         let results = constructLayerToDna(newDna, layers);
         let loadedElements = [];
